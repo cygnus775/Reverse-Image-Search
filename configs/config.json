@@ -1,0 +1,26 @@
+{
+  "dirs" : {
+    "data_root": "data",
+    "data_raw": "data/raw",
+    "processed_data": "data/processed"
+},
+
+  "files": {
+    "uncompressed_features": "data/processed/features_uncompressed.pickle",
+    "compressed_features": "data/processed/features_compressed.pickle",
+    "filenames": "data/processed/filenames.pickle",
+    "annoy": "data/processed/annoy.ann"
+  },
+
+  "model": "resnetv2",
+
+  "pca": {
+    "num_dimensions": 100
+  },
+
+  "annoy": {
+    "num_trees": 100,
+    "num_dimensions": 100
+  }
+
+}
