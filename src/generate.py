@@ -20,7 +20,6 @@ try:
 except Exception as e:
     logger.exception(f"Failed to read configs file {CONFIG_PATH}")
 
-
 try:
     logger.debug("Reading config values")
     # Data directories
@@ -54,6 +53,7 @@ logger.debug(f"Loaded model {MODEL} successfully")
 
 logger.debug("Getting filenames")
 filenames = sorted(get_file_list(DATA_RAW))
+
 
 def generate():
     # Extract the feature list
@@ -97,7 +97,6 @@ def generate():
     except Exception as e:
         logger.exception(f"failed to save compressed features to {COMPRESSED_FEATURES}")
 
-
     # Generate and save annoy trees
     try:
         logger.debug(f"Generating annoy index to {ANNOY}")
@@ -105,6 +104,7 @@ def generate():
         logger.debug(f"Annoy index generated successfully at {ANNOY}")
     except Exception as e:
         logger.exception(f"Failed to generate annoy index to {ANNOY}")
+
 
 if __name__ == "__main__":
     generate()
