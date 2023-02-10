@@ -21,7 +21,7 @@ def extract_features(img_path, model):
     preprocessed_img = preprocess_input(expanded_img_array)
     features = model.predict(preprocessed_img, verbose=0)
     flattened_features = features.flatten()
-    normalized_features = flattened_features / norm(flattened_features)
+    normalized_features = flattened_features/norm(flattened_features)
     return normalized_features
 
 
@@ -39,8 +39,7 @@ def get_file_list(root_dir):
 
 
 # Perform PCA
-def compress_features(feature_list):
-    num_dimensions = 100
+def compress_features(feature_list, num_dimensions: int = 100):
     pca = PCA(n_components=num_dimensions)
     pca.fit(feature_list)
 
@@ -49,10 +48,10 @@ def compress_features(feature_list):
 
 
 # Generate Annoy index
-def generate_annoy(filenames, feature_list_compressed, save_path):
+def generate_annoy(filenames: list, feature_list_compressed: list, save_path: str, num_trees: int = 100,
+                   num_dimensions: int = 100):
+
     # Generate annoy index files
-    num_trees = 100
-    num_dimensions = 100
     annoy_index = AnnoyIndex(num_dimensions, metric='angular')
     for i in range(len(filenames)):
         annoy_index.add_item(i, feature_list_compressed[i])
