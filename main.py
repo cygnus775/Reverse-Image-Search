@@ -119,6 +119,7 @@ async def upload_image(upload_file: UploadFile = File(...), num_images: int = 10
     for i in similar_filenames:
         split_names = i.split("/")
         split_names.pop(0)
+        split_names.pop(0)
         filtered_filenames.append(f'/static/{"/".join(split_names)}')
 
     logger.debug(f"returning {filtered_filenames} as response")
