@@ -44,11 +44,28 @@ if st.button("Start Search"):
         images = get_images(url=API_URL, upload_image=upload_img, num_images=num_img)
         static_image_links = [BASE_URL + image_link for image_link in images]
 
-        for image_link in static_image_links:
-            img = requests.get(image_link)
-            if img.ok:
-                image_content = Image.open(BytesIO(img.content))
-                st.image(image_content, use_column_width='auto')
+        n_cols = 4
+        n_rows = int(num_img / n_cols)
+
+        i = 0
+        while i <= num_img:
+            if i + 4 > num_img:
+                diff = num_img - i
+                if diff != 0:
+                    cols = st.columns(diff)
+
+                    for j in range(diff):
+                        img = requests.get(static_image_links[i + j])
+                        image_content = Image.open(BytesIO(img.content))
+                        cols[j].image(image_content)
+                break
+            else:
+                cols = st.columns(n_cols)
+                for j in range(n_cols):
+                    img = requests.get(static_image_links[i + j])
+                    image_content = Image.open(BytesIO(img.content))
+                    cols[j].image(image_content)
+                i += 4
 
     else:
         st.error("Please provide an image")
