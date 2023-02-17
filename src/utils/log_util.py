@@ -3,7 +3,7 @@ import logging
 
 
 # Function to return a custom logger
-def create_logger(logger_name: str, log_file: str, logger_level=logging.DEBUG,
+def create_logger(logger_name: str, log_file: str, logger_level=logging.INFO,
                   log_format: str = '%(asctime)s:%(name)s:%(message)s'):
     logger = logging.getLogger(logger_name)
     logger.setLevel(logger_level)
